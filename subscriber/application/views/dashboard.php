@@ -2,7 +2,7 @@
 
   <div class="row">
 
-    <div class="col-md-4">
+    <div class="col-sm-12 col-md-4">
 
       <div class="list-group list-group-class">
 
@@ -18,7 +18,7 @@
 
     </div>
 
-    <div class="col-md-8">
+    <div class="col-sm-12 col-md-8">
 
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -30,7 +30,7 @@
 
               <div class="row">
 
-                <div class="col-md-2">
+                <div class="col-sm-2 col-md-2">
 
                   <div class="well well-sm">
                     <h1 class="text-center text-current"></h1>
@@ -38,7 +38,7 @@
                   </div>
 
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-2 col-md-2">
 
                   <div class="well well-sm">
                     <h1 class="text-center text-last"></h1>
@@ -47,7 +47,7 @@
 
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-sm-2 col-md-2">
 
                   <div class="well well-sm">
                     <h1 class="text-center text-self"></h1>

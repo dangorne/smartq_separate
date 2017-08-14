@@ -59,30 +59,15 @@
 
     }
 
+    public function leave(){
+
+      echo json_encode(array( 'success' => $this->main_model->leave($this->input->post('selected'))));
+    }
+
+
     public function editdetail(){
 
-      // if($this->input->post('type')=='name'){
-        // echo print_r($this->input->post('content'));
-      // }
-
-      //returns the error message string
-
-
-      // if($var.success){
-
       echo json_encode($this->main_model->editq($this->input->post('type'), $this->input->post('content')));
-      // }else{
-        // echo json_encode($var);
-      // }
-      // $result = array(
-      //   'success' => TRUE,
-      // );
-      //
-      // $result = array(
-      //   'success' => FALSE,
-      // );
-
-      // echo json_encode($result);
     }
 
     public function logout(){
@@ -184,6 +169,10 @@
 
       echo json_encode($result);
 
+    }
+
+    public function joinq(){
+      echo json_encode($this->main_model->joinq());
     }
 
     public function createq(){

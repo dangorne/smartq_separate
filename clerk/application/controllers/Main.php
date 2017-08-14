@@ -40,8 +40,6 @@
       foreach ($search_result as $row)
       {
         echo '<tr>';
-        // echo '<td>'.date("h:i:s").'</td>';
-        // echo '<td>'.$row->join_time.'</td>';
         echo '<td>'.date('h:i:s A, l - d M Y', strtotime($row->join_time)).'</td>';
         echo '<td>'.$row->queue_number.'</td>';
         echo '</tr>';
@@ -401,39 +399,39 @@
       $this->load->helper('form');
       $this->load->library('form_validation');
 
-		  // if ($this->form_validation->run('syntax')){
-      //
-      //   if ($this->main_model->existingUsername()){
-      //
-      //     unset($_SESSION['user_error']);
-      //     if($this->main_model->correctPassword()){
-      //
-      //         $userdata = array(
-      //          'username' => $this->input->post('user')
-      //         );
-      //         $this->session->set_userdata($userdata);
+		  if ($this->form_validation->run('syntax')){
 
-              // redirect(base_url(). '');
-              // if($this->main_model->hasQueue()){
+        if ($this->main_model->existingUsername()){
+
+          unset($_SESSION['user_error']);
+          if($this->main_model->correctPassword()){
+
+              $userdata = array(
+               'username' => $this->input->post('user')
+              );
+              $this->session->set_userdata($userdata);
+
+              redirect(base_url(). '');
+              if($this->main_model->hasQueue()){
                 redirect('dashboard');
-              // }else{
-              //   redirect('createq');
-              // }
-    //       }else{
-     //
-    //         $this->session->set_flashdata('pass_error', 'error');
-    //         $this->login();
-    //       }
-    //    }else{
-     //
-    //       $this->session->set_flashdata('user_error', 'error');
-    //       $this->login();
-    //    }
-  	//  }else{
-     //
-    //     $this->session->set_flashdata('syntax_error', 'error');
-    //     $this->login();
-  	//  }
+              }else{
+                redirect('createq');
+              }
+          }else{
+
+            $this->session->set_flashdata('pass_error', 'error');
+            $this->login();
+          }
+       }else{
+
+          $this->session->set_flashdata('user_error', 'error');
+          $this->login();
+       }
+  	 }else{
+
+        $this->session->set_flashdata('syntax_error', 'error');
+        $this->login();
+  	 }
    }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     public function signup_validated(){

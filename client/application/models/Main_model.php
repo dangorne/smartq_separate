@@ -139,6 +139,37 @@ class Main_model extends CI_Model {
     return TRUE;
 	}
 
+  public function joinq()
+  {
+
+    $this->load->helper('url');
+
+    if($this->hasQueue()){
+      return FALSE;
+    }
+
+    $this->db->set('queue_name', $this->input->post('selected'));
+    $this->db->where('client_userName', $this->session->userdata['username']);
+    $this->db->update('client_info');
+
+    return TRUE;
+  }
+
+  public function leaveq()
+  {
+
+    $this->load->helper('url');
+
+    if(!$this->hasQueue()){
+      return FALSE;
+    }
+
+    $this->db->set('queue_name', $this->input->post('selected'));
+    $this->db->where('client_userName', $this->session->userdata['username']);
+    $this->db->update('client_info');
+
+    return TRUE;
+  }
 
   public function createq()
   {
@@ -165,9 +196,9 @@ class Main_model extends CI_Model {
 
     $this->db->insert('client_transaction', $data);
 
-    $this->db->set('queue_name', $this->input->post('input')['name']);
-    $this->db->where('client_userName', $this->session->userdata['username']);
-    $this->db->update('client_info');
+    // $this->db->set('queue_name', $this->input->post('input')['name']);
+    // $this->db->where('client_userName', $this->session->userdata['username']);
+    // $this->db->update('client_info');
 
     return TRUE;
   }
@@ -202,16 +233,25 @@ class Main_model extends CI_Model {
     return FALSE;
   }
 
+  public function leave($queue){
+
+    $this->db->where('client_userName', $this->session->userdata('username'));
+    $this->db->set('queue_name', 'none');
+    $this->db->update('client_info');
+
+    return TRUE;
+  }
+
 	public function next_service_num()
 	{
 
-    $this->db->set('click', 1);
+
 
     $this->db->where('queue_name', $this->getqueuename());
-    $this->db->where('click', 0);
+    $this->db->set('click', 'click+1', FALSE);
     $this->db->update('client_transaction');
 
-    return $this->getCurrentServiceNum()+1;
+    return $this->getCurrentServiceNum();
 
 	}
 
@@ -294,7 +334,13 @@ class Main_model extends CI_Model {
 
     $this->db->where('queue_name', $this->getqueuename());
 
-    return $this->db->get('client_transaction')->row()->serving_atNo;
+    $serving = $this->db->get('client_transaction')->row()->serving_atNo;
+
+    $this->db->where('queue_name', $this->getqueuename());
+
+    $click = $this->db->get('client_transaction')->row()->click;
+
+    return $serving + $click;
 
   }
 

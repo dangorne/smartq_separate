@@ -21,6 +21,8 @@ $route['load_status'] = 'main/load_status';
 $route['editdetail'] = 'main/editdetail';
 $route['fetchlist'] = 'main/fetchlist';
 $route['windowrio'] = 'main/windowrio';
+$route['joinq'] = 'main/joinq';
+$route['leave'] = 'main/leave';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
